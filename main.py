@@ -28,7 +28,7 @@ template = env.get_template('template.html')
 
 if __name__ == '__main__':
 
-    get_actual_age()
+    rendered_page = get_actual_age()
     with open('index.html', 'w', encoding="utf8") as file:
         file.write(rendered_page)
 
