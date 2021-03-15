@@ -1,8 +1,9 @@
-from http.server import HTTPServer, SimpleHTTPRequestHandler
-
-from jinja2 import Environment, FileSystemLoader, select_autoescape
 import datetime
 import pandas
+
+from http.server import HTTPServer, SimpleHTTPRequestHandler
+from jinja2 import Environment, FileSystemLoader, select_autoescape
+
 
 now = datetime.datetime.now()
 env = Environment(
@@ -10,10 +11,9 @@ env = Environment(
     autoescape=select_autoescape(['html', 'xml'])
 )
 
-excel_data_wines = pandas.read_excel(
-    'C:/Users/AlBan/Desktop/wine_bugs/wine.xlsx')
+excel_data_wines = pandas.read_excel('wine.xlsx')
 wines = excel_data_wines.to_dict(orient='record')
-template = env.get_template('C:/Users/AlBan/Desktop/wine_bugs/template.html')
+template = env.get_template('template.html')
 
 
 rendered_page = template.render(
@@ -22,7 +22,7 @@ rendered_page = template.render(
 )
 
 
-with open('C:/Users/AlBan/Desktop/wine_bugs/index.html', 'w', encoding="utf8") as file:
+with open('index.html', 'w', encoding="utf8") as file:
     file.write(rendered_page)
 
 server = HTTPServer(('0.0.0.0', 8000), SimpleHTTPRequestHandler)
