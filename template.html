@@ -117,7 +117,7 @@
           {% for wine in wines: %}
           <div class="col-lg-4 mb-5 col-md-6">
             <div class="wine_v_1 text-center pb-4 pt-5">
-              <img src="{f'images/'{wine.Картинка}}" alt="Image" class="img-fluid">
+              <img src="images/{{wine.Картинка}}" alt="Image" class="img-fluid">
               <div>
                 <h3 class="heading mt-3 mb-3 text-dark">{{wine.Название}}</h3>
                 <p>
@@ -128,7 +128,9 @@
             </div>
           </div>
           {% endfor %}
-
+        </div>  
+      </div>
+      
     <div class="hero-2" style="background-image: url('assets/hero_2.jpg');">
     <div><a id="feedback"></a></div>
      <div class="container">
