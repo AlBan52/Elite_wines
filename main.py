@@ -9,26 +9,30 @@ def get_actual_age():
 
     now = datetime.datetime.now()
     establish_year = 1920
-    rendered_page = template.render(
-        now.year - establish_year,
-        wines=wines
-    )
-    return rendered_page
+    age = now.year - establish_year
+
+    return age
 
 
-env = Environment(
-    loader=FileSystemLoader('.'),
-    autoescape=select_autoescape(['html', 'xml'])
-)
+def get_render_wine_cards():
 
-excel_data_wines = pandas.read_excel('wine.xlsx')
-wines = excel_data_wines.to_dict(orient='record')
-template = env.get_template('template.html')
+    excel_data_wines = pandas.read_excel('wine.xlsx')
+    wines = excel_data_wines.to_dict(orient='record')
+
+    return wines
 
 
 if __name__ == '__main__':
 
-    rendered_page = get_actual_age()
+    env = Environment(
+        loader=FileSystemLoader('.'),
+        autoescape=select_autoescape(['html', 'xml'])
+    )
+    template = env.get_template('template.html')
+    age = get_actual_age()
+    wines = get_render_wine_cards()
+
+    rendered_page = template.render(age=age, wines=wines)
     with open('index.html', 'w', encoding="utf8") as file:
         file.write(rendered_page)
 
