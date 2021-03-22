@@ -1,6 +1,8 @@
+import collections
 import datetime
 import pandas
 
+from pprint import pprint
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
@@ -14,12 +16,30 @@ def get_actual_age():
     return age
 
 
-def get_render_wine_cards():
+def get_render_products_cards():
 
     excel_data_wines = pandas.read_excel('wine.xlsx')
     wines = excel_data_wines.to_dict(orient='record')
 
     return wines
+
+
+def filter_products_categories():
+
+    products_from_file = pandas.read_excel(
+        'wine2.xlsx', na_values='nan', keep_default_na=False)
+    products = products_from_file.to_dict(orient='record')
+
+    pprint(products)
+
+    filtered_products = collections.defaultdict(list)
+    for product in products:
+        category = product['Категория']
+        filtered_products[category].append(product)
+
+    pprint(filtered_products)
+
+    return filtered_products
 
 
 if __name__ == '__main__':
@@ -30,7 +50,9 @@ if __name__ == '__main__':
     )
     template = env.get_template('template.html')
     age = get_actual_age()
-    wines = get_render_wine_cards()
+    wines = get_render_products_cards()
+
+    filter_products_categories()
 
     rendered_page = template.render(age=age, wines=wines)
     with open('index.html', 'w', encoding="utf8") as file:
