@@ -30,14 +30,10 @@ def filter_products_categories():
         'wine2.xlsx', na_values='nan', keep_default_na=False)
     products = products_from_file.to_dict(orient='record')
 
-    pprint(products)
-
     filtered_products = collections.defaultdict(list)
     for product in products:
         category = product['Категория']
         filtered_products[category].append(product)
-
-    pprint(filtered_products)
 
     return filtered_products
 
@@ -50,11 +46,12 @@ if __name__ == '__main__':
     )
     template = env.get_template('template.html')
     age = get_actual_age()
-    wines = get_render_products_cards()
+#    wines = get_render_products_cards()
 
-    filter_products_categories()
+    filtered_products = filter_products_categories()
 
-    rendered_page = template.render(age=age, wines=wines)
+    rendered_page = template.render(
+        age=age, filtered_products=filtered_products)
     with open('index.html', 'w', encoding="utf8") as file:
         file.write(rendered_page)
 
