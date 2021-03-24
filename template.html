@@ -113,27 +113,34 @@
             </p>
           </div>
         </div>
+
         {% for key, value in filtered_products.items(): %}
-          <div class="col-12 section-title text-center mb-5">
-            <h2 class="d-block">{{key}}</h2>
+          <div class="row">
+            <div class="col-12 section-title text-center">
+              <h2 class="d-block">{{ key }}</h2>
+            </div>
+            
+            {% for item in value %}
               <div class="col-lg-4 mb-5 col-md-6">
-                {% for item in value %}
-                <div class="product_v_1 text-center pb-4 pt-5">
+                <div class="wine_v_1 text-center pb-4 pt-5">
                   <img src="images/{{item.Картинка}}" alt="Image" class="img-fluid">
                   <div>
                     <h3 class="heading mt-3 mb-3 text-dark">{{item.Название}}</h3>
                     <p>
+                      {% if item.Сорт %}
                       Сорт винограда - {{item.Сорт}}<br/>
+                      {% else %}
                       <span class="price">{{item.Цена}} р.</span>
+                      {% endif %}
                     </p>
                   </div>
                 </div>
-                {% endfor %}
               </div>
-          </div>    
-          {% endfor %}
-        </div>  
+            {% endfor %}
+          </div>
+        {% endfor %}
       </div>
+    </div>
       
     <div class="hero-2" style="background-image: url('assets/hero_2.jpg');">
     <div><a id="feedback"></a></div>
