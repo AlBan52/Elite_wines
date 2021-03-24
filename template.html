@@ -129,9 +129,10 @@
                     <p>
                       {% if item.Сорт %}
                       Сорт винограда - {{item.Сорт}}<br/>
-                      {% else %}
-                      <span class="price">{{item.Цена}} р.</span>
+                          {% else %}
+                          {{item.Сорт}}<br/>
                       {% endif %}
+                      <span class="price">{{item.Цена}} р.</span>
                       {% if item.Акция %}
                       <img src="assets/profitable.png" style="width:10rem;height: 10rem;position:absolute;right: -20px;top: -20px;">
                       {% else %}
