@@ -27,7 +27,7 @@ def get_render_products_cards():
 def filter_products_categories():
 
     products_from_file = pandas.read_excel(
-        'wine2.xlsx', na_values='nan', keep_default_na=False)
+        'wine3.xlsx', na_values='nan', keep_default_na=False)
     products = products_from_file.to_dict(orient='record')
 
     filtered_products = collections.defaultdict(list)
