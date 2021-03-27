@@ -2,7 +2,7 @@ import collections
 import datetime
 import pandas
 
-from pprint import pprint
+from collections import OrderedDict
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
@@ -16,26 +16,25 @@ def get_actual_age():
     return age
 
 
-def get_render_products_cards():
-
-    excel_data_wines = pandas.read_excel('wine.xlsx')
-    wines = excel_data_wines.to_dict(orient='record')
-
-    return wines
-
-
-def filter_products_categories():
+def parse_products_data_from_file():
 
     products_from_file = pandas.read_excel(
         'wine3.xlsx', na_values='nan', keep_default_na=False)
     products = products_from_file.to_dict(orient='record')
+
+    return products
+
+
+def get_sorted_products(products):
 
     filtered_products = collections.defaultdict(list)
     for product in products:
         category = product['Категория']
         filtered_products[category].append(product)
 
-    return filtered_products
+    sorted_products = OrderedDict(sorted(filtered_products.items()))
+
+    return sorted_products
 
 
 if __name__ == '__main__':
@@ -45,13 +44,15 @@ if __name__ == '__main__':
         autoescape=select_autoescape(['html', 'xml'])
     )
     template = env.get_template('template.html')
-    age = get_actual_age()
-#    wines = get_render_products_cards()
 
-    filtered_products = filter_products_categories()
+    age = get_actual_age()
+
+    products = parse_products_data_from_file()
+
+    sorted_products = get_sorted_products(products)
 
     rendered_page = template.render(
-        age=age, filtered_products=filtered_products)
+        age=age, sorted_products=sorted_products)
     with open('index.html', 'w', encoding="utf8") as file:
         file.write(rendered_page)
 
