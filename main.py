@@ -16,7 +16,7 @@ def get_actual_age():
     return age
 
 
-def parse_products_data_from_file():
+def parse_products_from_file():
 
     products_from_file = pandas.read_excel(
         'wine3.xlsx', na_values='nan', keep_default_na=False)
@@ -47,7 +47,7 @@ if __name__ == '__main__':
 
     age = get_actual_age()
 
-    products = parse_products_data_from_file()
+    products = parse_products_from_file()
 
     sorted_products = get_sorted_products(products)
 
