@@ -1,3 +1,4 @@
+import argparse
 import collections
 import datetime
 import pandas
@@ -18,8 +19,13 @@ def get_actual_age():
 
 def parse_products_from_file():
 
+    parser = argparse.ArgumentParser()
+    parser.add_argument('file_path', help='Full path to file with products')
+    args = parser.parse_args()
+    file_path = args.file_path
+
     products_from_file = pandas.read_excel(
-        'wine3.xlsx', na_values='nan', keep_default_na=False)
+        file_path, na_values='nan', keep_default_na=False)
     products = products_from_file.to_dict(orient='record')
 
     return products
