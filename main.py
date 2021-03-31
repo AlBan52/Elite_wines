@@ -38,7 +38,7 @@ def get_sorted_products(products):
         category = product['Категория']
         filtered_products[category].append(product)
 
-    sorted_products = OrderedDict(sorted(filtered_products.items()))
+    sorted_products = dict(sorted(filtered_products.items()))
 
     return sorted_products
 
