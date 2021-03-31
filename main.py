@@ -47,7 +47,7 @@ if __name__ == '__main__':
 
     env = Environment(
         loader=FileSystemLoader('.'),
-        autoescape=select_autoescape(['html', 'xml'])
+        autoescape=select_autoescape(['html', 'xml']),
     )
     template = env.get_template('template.html')
 
@@ -58,7 +58,9 @@ if __name__ == '__main__':
     sorted_products = get_sorted_products(products)
 
     rendered_page = template.render(
-        age=age, sorted_products=sorted_products)
+        age=age,
+        sorted_products=sorted_products,
+    )
     with open('index.html', 'w', encoding="utf8") as file:
         file.write(rendered_page)
 
