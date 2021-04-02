@@ -128,15 +128,14 @@
                     <h3 class="heading mt-3 mb-3 text-dark">{{product.Название}}</h3>
                     <p>
                       {% if product.Сорт %}
-                      Сорт винограда - {{product.Сорт}}<br/>
+                        Сорт винограда - {{product.Сорт}}<br/>
                           {% else %}
                           {{product.Сорт}}<br/>
                       {% endif %}
-                      <span class="price">{{product.Цена}} р.</span>
-                      {% if product.Акция %}
-                      <img src="assets/profitable.png" style="width:10rem;height: 10rem;position:absolute;right: -20px;top: -20px;">
-                      {% else %}
-                      {% endif %}
+                          <span class="price">{{product.Цена}} р.</span>
+                            {% if product.Акция %}
+                              <img src="assets/profitable.png" style="width:10rem;height: 10rem;position:absolute;right: -20px;top: -20px;">
+                            {% endif %}
                     </p>
                   </div>
                 </div>
