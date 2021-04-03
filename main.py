@@ -13,8 +13,8 @@ def get_actual_age():
     now = datetime.datetime.now()
     establish_year = 1920
     age = now.year - establish_year
-    digit_of_age = [int(digit) for digit in str(age)]
-    first_digit, second_digit, last_digit = digit_of_age[0], digit_of_age[1], digit_of_age[2]
+    age_digits = [int(digit) for digit in str(age)]
+    first_digit, second_digit, last_digit = age_digits
 
     if first_digit == 1 and second_digit != 1 and last_digit == 1:
         age_word = 'год'
