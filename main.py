@@ -13,8 +13,19 @@ def get_actual_age():
     now = datetime.datetime.now()
     establish_year = 1920
     age = now.year - establish_year
+    digit_of_age = [int(digit) for digit in str(age)]
+    first_digit, second_digit, last_digit = digit_of_age[0], digit_of_age[1], digit_of_age[2]
 
-    return age
+    if first_digit == 1 and second_digit != 1 and last_digit == 1:
+        age_word = 'год'
+    elif second_digit == 0 and last_digit >= 2 and last_digit <= 4:
+        age_word = 'года'
+    elif last_digit == 0 or last_digit >= 5 and last_digit <= 9:
+        age_word = 'лет'
+    else:
+        age_word = 'лет'
+
+    return age, age_word
 
 
 def parse_products_from_file():
@@ -51,7 +62,7 @@ if __name__ == '__main__':
     )
     template = env.get_template('template.html')
 
-    age = get_actual_age()
+    age, age_word = get_actual_age()
 
     products = parse_products_from_file()
 
