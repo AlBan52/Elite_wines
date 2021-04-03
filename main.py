@@ -70,6 +70,7 @@ if __name__ == '__main__':
 
     rendered_page = template.render(
         age=age,
+        age_word=age_word,
         sorted_products=sorted_products,
     )
     with open('index.html', 'w', encoding="utf8") as file:
