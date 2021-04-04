@@ -18,7 +18,7 @@ def get_actual_age():
 
     if first_digit == 1 and second_digit != 1 and last_digit == 1:
         age_word = 'год'
-    elif second_digit == 0 and last_digit >= 2 and last_digit <= 4:
+    elif last_digit >= 2 and last_digit <= 4:
         age_word = 'года'
     elif last_digit == 0 or last_digit >= 5 and last_digit <= 9:
         age_word = 'лет'
