@@ -13,9 +13,9 @@ def get_actual_age():
     establish_year = 1920
     age = now.year - establish_year
     age_digits = [int(digit) for digit in str(age)]
-    first_digit, second_digit, last_digit = age_digits
+    _, second_digit, last_digit = age_digits
 
-    if first_digit == 1 and second_digit != 1 and last_digit == 1:
+    if second_digit != 1 and last_digit == 1:
         age_word = 'год'
     elif last_digit >= 2 and last_digit <= 4:
         age_word = 'года'
